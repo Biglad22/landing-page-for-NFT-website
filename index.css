@@ -188,7 +188,7 @@ nav > div > button > h6 {
 .menu-button > div{
     flex-basis:100%;
     width:100%;
-    height:4px;
+    height:0.4rem;
     margin:8px 0;
     border-radius:4px;
     background:rgb(199,32,164);
@@ -847,14 +847,7 @@ footer{
         font-size:55.55%;
     }
 }
-
-
-@media (max-width:1200px){
-    
-    .menu-button{
-        display:inline-block;
-        flex-basis:auto;
-    }
+@media (max-width:1150px){
     .nav-links{
         display:none;
     }
@@ -890,8 +883,15 @@ footer{
         margin:1.6em auto;
         width:100%;
     }
+}
 
 
+@media (max-width:1200px){
+    
+    .menu-button{
+        display:inline-block;
+        flex-basis:auto;
+    }
 
     .hero-text > div{
         flex-basis:100%;
