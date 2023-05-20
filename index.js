@@ -1,56 +1,107 @@
-console.log('na you dey hot')
-console.warn('you\'re getting too hot')
-console.error('you\'re on fire');
-var x = ['emma','jane','james','cate'];
-var y = {'emma':24,'jane':15, 'james':21, 'cate':18};
-//let z = alert(prompt('please enter a name')); 
-let person =['emma','gina','husk'];
-let name ='emmanuel';
-let code ='3412'
-console.log(name.replace('nuel',code));
-
-function passGen(name,yob){
-    let a=name.slice(0,5);
-    let b=a[1].toUpperCase();
-    let c=name.slice(3, name.length);
-    let d=String(yob);
-    let f=d.slice(5,6);
-    let g=d.slice(0,2);
-    let h=a.replace(a[1],b);
-    return(h+g+c+f);
-}
-let k= passGen('emmanuel',26.1996);
-console.log(k);
+window.onload = ()=>{
+    'use strict';
+    const footerBtns = document.getElementsByClassName('footerlinks-btn');
+    const footerLinks = document.getElementsByClassName('footerlinks-list');
+    const navBar = document.querySelector('.menu-button');
+    const navMenu = document.querySelector('.nav-links');
+    const navMenuSmall = document.querySelector('.nav-links-small');
+    let screenWidth = window.innerWidth;
+    
+    
+    navBar.addEventListener('click',()=>{
+        navBar.classList.toggle('menu-active');
+        if (navBar.classList.contains('menu-active')){
+            navMenu.classList.toggle('nav-links-small');
+        }else{
+            navMenu.classList.toggle('nav-links-small');
+        };
+    });
 
 
 
-/*
-console.log(age);
-if (15 > age){
-    console.error('how the hell did you find us?, we\'re telling dad');
-}
-else if (18 > age && age >= 15){
-    console.warn(`you're ${age} and you're cool, but not cool enough for this site, OPPS`);
-}
-else if (15< age && age >= 18){
-    if(gender =='male'){
-        console.log(`you're ${age}, fresh and young, men want to be you, women want to sleep with you.`);
+    let i;
+
+    for (i = 0; i< footerBtns.length ; i++){
+        footerBtns[i].addEventListener( 'click',function(e){
+            console.log('button pressed');
+            let selected = e.target.innerText;
+            for (i = 0; i < footerBtns.length; i++){
+                let state = false;
+
+                if (selected === footerBtns[i].innerText){
+                    let targ = footerBtns[i]; 
+                    let list = footerBtns[i].nextElementSibling;
+
+                    if (list.classList.contains('ul-active')===false){
+                        list.classList.toggle('ul-active');
+
+                        for (i = 0; i < footerBtns.length; i++){
+                            let otherLists = footerBtns[i].nextElementSibling;
+                            if (footerBtns[i] !== targ && otherLists.classList.contains('ul-active') ){
+                                otherLists.classList.toggle('ul-active');
+                            }
+                        };
+                    }else{
+                        list.classList.toggle('ul-active');
+                    };
+                    break;  
+                }
+            }    
+        });
+    };
+
+    const cardsContainer = document.querySelector('.NFT-cards');
+
+    const nftCards = cardsContainer.children;
+
+
+    //intersection function for NFT cards
+    const options = {
+        threshold : 0.1
+    };
+    const observe = new IntersectionObserver ((entries,observe)=>{
+        let x = entries;
+        entries.forEach((entry)=>{
+            const elem = entry.target
+            for (i=0; i < x.length; i++){
+                if(entry.isIntersecting === true && elem.classList.contains('visible-card') === false){
+                    elem.classList.toggle('visible-card');
+                }
+            }
+        })
+    }, options);
+
+    for (i = 0; i < nftCards.length; i++){
+        console.log(nftCards[i])
+        observe.observe(nftCards[i]);
     }
-    else if(gender =='female'){
-        console.log(`you're ${age}, beautiful and loved, men want you, women envy you.`);
-    }
-    else{
-        console.error('Bro we don\'t do that here.');
-    }
-}
-let b = document.getElementById('nav');
-b.innerHTML='<h1>LOVERS EVERYWHERE</h1>';
-*/
 
 
+    //intersection function for roadmap
 
+    //funtion for the roadmap highlights
+    const roadObserver = new IntersectionObserver ((entries,roadObserver)=>{
+        entries.forEach((entry)=>{
+            let elem = entry.target;
+            if(entry.isIntersecting === true && elem.classList.contains('rm-highlights-active') === false){
+                elem.classList.toggle('rm-highlights-active');
+            }    
+        })
+    },options);
 
+    const roadHighlights = document.querySelector('.roadmap-highlights');
+    roadObserver.observe(roadHighlights);
 
+    //function for the roadmap img
+    const roadImgOb = new IntersectionObserver((entries,roadImgOb)=>{
+        entries.forEach((entry)=>{
+            let elem = entry.target; 
+            if (entry.isIntersecting === true && elem.classList.contains('rm-img-active') === false){
+                elem.classList.toggle('rm-img-active')
+            }  
+        })
+    },options);
 
-
-
+    const roadImg = document.querySelector('.roadmap-inner-img');
+    roadObserver.observe(roadImg);
+}   
